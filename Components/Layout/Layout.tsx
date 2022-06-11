@@ -25,7 +25,7 @@ import Footer from './Footer';
                 <div className=''>
                     <div className = ''>
                         <Header />
-                        <div>
+                        <div className="">
                             {children}
                         </div>
                     </div>

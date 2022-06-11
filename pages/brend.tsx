@@ -127,30 +127,7 @@ export default function PreArea(props) {
             <div className="mt-[85px] bg-customize-blace111 relative">
                 <Layout>
                     {add}
-                    <Area> <div className="mb-20 border-[1px] border-white/20 bg-customize-button/70 w-full h-[850px] rounded-lg">
-                        <div>
-                            <div className="flex">
-                                <div className="">
-                                    <p className="ml-16 mt-5 text-xl text-white">Доступные Бренды</p>
-                                </div>
-                                <div className=" ml-[380px] mt-5 bg-yellow-600 rounded-lg h-10 w-36 text-center">
-                                    <button className="p-2 text-black" type="button" onClick={onDisp} >
-                                        Добавить бренд
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="border-[1px] rounded-xl drop-shadow-2xl h-96 mt-8 mx-10 overflow-y-scroll overscroll-contain ">
-                                <div className="">
-                                    <TodoList Todos={Todo} />
-
-                                </div >
-                                <div className="">
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    <Area> 
 
                     </Area>
 
