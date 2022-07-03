@@ -3,9 +3,10 @@ import Layout from "../Components/Layout/Layout"
 import Link from "next/Link"
 import Area from "../Components/Area"
 import { useRouter } from "next/router"
-
+import TodoList from "../Components/TodoList"
 
 interface MyProps {
+    Todo: JSX.Element
 
 }
 
@@ -33,7 +34,7 @@ export default class PreArea extends React.Component<MyProps, MyState>  {
     render() {
         return (
             
-
+          <TodoList Todos={Todos}/>
 
 
         )

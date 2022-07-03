@@ -3,7 +3,7 @@ import Layout from "../Components/Layout/Layout"
 import Link from "next/Link"
 import Area from "../Components/Area"
 import TodoList from "../Components/TodoList"
-import { Context } from "../Components/context"
+
 
 
 interface MyProps {
@@ -80,7 +80,7 @@ export default function PreArea(props) {
 
     }
     const add = (
-        <div className={`${Disp.className} w-[400px] h-[520px] bg-customize-button inset-x-[800px] fixed z-40 top-[300px] rounded-xl border-[1px] border-customize-text`}>
+        <div className={` w-[400px] h-[520px] bg-customize-button inset-x-[800px] fixed z-40 top-[300px] rounded-xl border-[1px] border-customize-text`}>
             <button className="" type="button" onClick={onDisp}>
                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2"
                     width="25.000000pt" height="25.000000pt" viewBox="0 0 512.000000 512.000000"
@@ -123,18 +123,18 @@ export default function PreArea(props) {
 
 
     return (
-        <Context.Provider value={{ removeTodo }} >
+        
             <div className="mt-[85px] bg-customize-blace111 relative">
                 <Layout>
                     {add}
-                    <Area> 
+                    
 
-                    </Area>
+                    <TodoList Todos={Todo}/>
 
 
                 </Layout>
             </div>
-        </Context.Provider>
+      
 
 
 

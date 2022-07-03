@@ -1,11 +1,11 @@
 import React,{useContext} from 'react'
-import {Context} from './context'
+
 
 
 export default function TodoItem({ sr,id,name,data,email }) {
    
-    const {removeTodo} = useContext(Context)
     
+    console.log(name)
 
     return (
         <div className="flex mt-5 ml-10 h-20">
@@ -29,7 +29,7 @@ export default function TodoItem({ sr,id,name,data,email }) {
                     </div>
                 </div>
                 <button className='mx-5'>
-                    <img src='/delete.png' width={20} onClick={() => removeTodo(id)} />
+                    <img src='/delete.png' width={20}  />
                 </button>
             </div>
         </div>
