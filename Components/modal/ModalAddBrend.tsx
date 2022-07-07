@@ -15,8 +15,8 @@ import { response } from "express";
 export interface IModalAddProps {
 
     Disp: String,
-    offDisp(why),
-
+    offDisp: (why) => void,
+    saveBrand: (data:IBrends ) => void,
 
 }
 
@@ -28,7 +28,7 @@ export interface IModalAddState {
     img: string,
 }
 
-
+@saga(BrendsEntity)
 export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddState> {
 
 
@@ -51,61 +51,26 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
         this.handleChange = this.handleChange.bind(this);
         this.openInput = this.openInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        //this.entranceUser = this.entranceUser.bind(this);
+        
 
 
     };
 
 
-    /*entranceUser() {
-        const fullUrl = 'http://localhost:3000';
-        console.log(5)
-        const params: any = {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                Authorization: 'bearer',
-            },
-
-        };
-
-        params['headers']['content-type'] = 'application/json';
-        params['body'] = JSON.stringify(this.state);
-        return fetch(fullUrl, params)
-            .then((response) => {
-                return response.json().then((json) => ({ json, response }));
-            }).then(({ json, response }) =>
-                Promise.resolve({
-                    success: response.ok ? true : false,
-                    response: json
-                })
-            );
-
-    }*/
+    
 
     async handleSubmit(event) {
-
-        const brendData: IBrends = {
+        const { saveBrand } = this.props;
+        const BrendsData : IBrends = {
             brendsId: null,
-            name: this.state.name,
             email: this.state.email,
+            name: this.state.name,
             img: this.state.img,
         }
-
-        const xSave = new Entity
-
-        //await this.entranceUser()
-
-        xSave.xSave('http://localhost:3000' + '/' + 'save', brendData)
-
-        Router.push('/profile/PrfileBrend')
+        saveBrand(BrendsData);
         
-        BrendsEntity.saveBrends
 
-        console.log(xSave.xSave, 'save')
-        console.log(brendData, 'data')
-        console.log(Entity,'entity')
-        console.log(BrendsEntity.saveBrends,'121212')
+        
 
     }
 

@@ -10,6 +10,8 @@ import { ENTITIES } from 'server/common';
 export interface Brends {
     id: string;
 
+    img: string;
+
     name: string;  
 
     createdAt: Date;
@@ -25,13 +27,15 @@ class BrendsEntity extends Entity {
     }
 
     @action()
-    public * fetchAllBrends() {
+    public * fetchAllBrend() {
         yield call(this.xRead, 'brends/all');
     }
 
+
+
     @action()
-    public * saveBrends() {
-        yield call(this.xSave, 'brends/save');
+    public * saveBrand(data) {
+        yield call(this.xSave, 'brends/save', data);
     }
 
 }

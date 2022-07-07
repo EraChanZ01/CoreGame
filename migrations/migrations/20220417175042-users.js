@@ -21,6 +21,7 @@ module.exports = {
       const randomBrend = faker.company.companyName();
       brend.push({
         "_id": brendid,
+        "img": " ",
         "name": randomBrend,
         "createdAt": Date.now(),
       })
