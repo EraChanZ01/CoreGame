@@ -1,22 +1,107 @@
 import React from "react";
-import Router from "next/router";
+import Router, { withRouter } from "next/router";
+import { ProfilingLevel } from "mongodb";
+import identity from 'redux/models/identity'
+import saga from 'redux/decorators/saga';
+import { connect } from 'react-redux';
+import BrendsEntity from 'redux/models/brends'
+import { ILoginData } from 'server/constants';
+import Entity from "redux/models/Entities";
 
 export interface IModalAddProps {
+
+    Disp: String,
+    offDisp(why),
+   
 
 }
 
 export interface IModalAddState {
 
 
+name: String,
+email: String,
+img: String,
 }
 
 
-export default class ModalAddBrend extends React.Component<IModalAddProps, IModalAddState> {
+export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddState> {
+
+
+    constructor(props) {
+        super(props);
+
+
+
+        this.state = {
+            name: " ",
+            email: " ",
+            img: " ",
+            
+
+            
+            
+           
+        };
+
+        this.handleChange = this.handleChange.bind(this)
+        this.openInput = this.openInput.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+
+    };
+
+
+    handleSubmit(event) {
+
+
+    }
+
+    handleChange(event) {
+
+        const target = event.target;
+        const name = target.name;
+        this.setState<typeof name>({
+
+            [name]: target.value
+
+        });
+        
+
+    }
+
+    openInput(event) {
+        this.handleChange(event)
+
+        const file = Array.from(event.target.files)
+
+        file.forEach(file => {
+            const reader = new FileReader()
+            const div = document.getElementById('input-div')
+           
+
+            
+
+            reader.onload = ev => {
+                console.log(ev.target.result)
+
+                
+
+                div.insertAdjacentHTML('afterend', `<img src="${ev.target.result}" class="absolute top-5 left-[70px]  h-64 w-64 rounded-xl z-50" /> `)
+            }
+
+            reader.readAsDataURL(file)
+
+           
+        })
+    }
+
+
 
     render() {
+        const { Disp } = this.props;
         return (
-            <div className={`${Disp.className} w-[400px] h-[520px] bg-customize-button inset-x-[800px] fixed z-40 top-[300px] rounded-xl border-[1px] border-customize-text`}>
-                <button className="" type="button" > 
+            <div className={` ${Disp ? Disp : 'hidden'} w-[400px] h-[520px] bg-customize-button inset-y-48 inset-x-[800px] fixed z-40 rounded-xl border-[1px] border-customize-text `}>
+                <button className="" type="button" onClick={() => this.props.offDisp('hidden')} >
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2"
                         width="25.000000pt" height="25.000000pt" viewBox="0 0 512.000000 512.000000"
                         preserveAspectRatio="xMidYMid meet">
@@ -30,18 +115,27 @@ export default class ModalAddBrend extends React.Component<IModalAddProps, IModa
                 <div>
 
 
-                    <div className=" border-[1px] border-black h-64 w-64 mx-[70px] mt-5 bg-white/80 rounded-xl ">
-                        <input type="" className="w-full h-full" value={AddSr} onChange={event => setAddSr(event.target.value)} />
+                    <div className=" static border-[1px] border-black h-64 w-64 mx-[70px] mt-5 bg-white/80 rounded-xl ">
+                        <div className={`relative w-full h-full bg-white rounded-xl`} id="input-div">
+                            
+                            <div className="block absolute border-2 border-black w-[120px] h-[120px] top-[66px] left-[66px] rounded-lg z-30">
+                                <input type="file" className=" " name="img" style={{ display: 'none' }} id="input-file" onChange={this.openInput} accept="image/*" />
+                                <label htmlFor="input-file" className=" rounded-lg block absolute border-2 border-black w-[40px] h-[40px] top-[37px] left-[37px] after:absolute after:border-b-2 after:top-[16px] after:w-8 after:border-black after:h-0 after:left-[2px]
+                             before:absolute before:border-l-2 before:top-[2px] before:w-0 before:border-black before:h-8 before:left-[17px]">
+
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="  mt-10  mx-16 ">
-                        <input name="name" type="text" value={AddName} onChange={event => setAddName(event.target.value)} className=" w-full h-8 rounded-lg bg-white/80" />
+                        <input type="text" className=" w-full h-8 rounded-lg bg-white/80 p-1" name="name" placeholder='Название' onChange={this.handleChange} />
                     </div>
                     <div className=" mt-10 mx-16">
-                        <input type="email" value={AddEmail} onChange={event => setAddEmail(event.target.value)} className=" w-full h-8 rounded-lg bg-white/80" />
+                        <input type="email" className=" w-full h-8 rounded-lg bg-white/80 p-1" name="email" placeholder='Почта' onChange={this.handleChange} />
                     </div>
                     <div className=" flex justify-center mt-5">
-                        <button className="bg-yellow-600 rounded-lg h-8 w-full mx-[65px] text-white"> 
+                        <button className="bg-yellow-600 rounded-lg h-8 w-full mx-[65px] text-white" type='button' onClick={this.handleSubmit}>
                             Добавить
                         </button>
                     </div>
@@ -51,4 +145,15 @@ export default class ModalAddBrend extends React.Component<IModalAddProps, IModa
     }
 
 
+    
+
+};
+
+const mapStateToProps = (state,props) => {
+    return {
+    };
 }
+
+const monitor_connected = connect(mapStateToProps, BrendsEntity.triggers())(ModalAddBrend);
+export default withRouter(monitor_connected);
+

@@ -10,14 +10,14 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 
 const Config = {
-    siteName: 'Magaz',
+    siteName: 'CoreGame',
     baseUrl: process.env.BASE_URL || "http://localhost",
     port: 3000,
     dev: isDev,
     debug_mode: process.env.DEBUG_MODE,
 mongo: {
 
-        uri: process.env.MONGO_URL|| 'mongodb://localhost:27017/Magaz',
+        uri: process.env.MONGO_URL|| 'mongodb://localhost:27017/CoreGame',
         // mongodb://localhost:27017/BlogDB
         // mongodb+srv://Aleksey:melnikloh@cluster0.lloww.mongodb.net/MyDB
         options: {

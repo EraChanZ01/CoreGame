@@ -69,7 +69,7 @@ export class Profile extends React.Component<MyProps> {
         const Data = this.getProfileContent()
         return (
             <Layout>
-                <div className="mt-20 bg-customize-blace111">
+                <div className="mt-20 bg-customize-blace111  relative ">
                     <div className='max-w-5xl mx-auto'>
                         <div className="">
                             <ProfileHeader />

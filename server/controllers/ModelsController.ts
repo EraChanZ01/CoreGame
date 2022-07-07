@@ -3,15 +3,15 @@ import { Request, Response } from 'express';
 import { route, GET, POST, DELETE } from 'awilix-express';
 
 
-@route('/api/brands')
-export default class BrandController extends BaseContext {
+@route('/api/models')
+export default class ModelsController extends BaseContext {
 
     @GET()
     @route('/all')
     getAll(req: Request, res: Response) {
-        const { BrandService } = this.di;
+        const { ModelsService } = this.di;
 
-        const result = BrandService.find()
+        const result = ModelsService.find()
             .then((data) => res.answer(data))
             .catch((err) => res.answer(null, err, 404))
     }
@@ -21,9 +21,9 @@ export default class BrandController extends BaseContext {
     @GET()
     @route('/save/all')
     saveAll(req: Request, res: Response) {
-        const { BrandService } = this.di;
+        const { ModelsService } = this.di;
 
-        const result = BrandService.find()
+        const result = ModelsService.find()
             .then((data) => res.answer(data))
             .catch((err) => res.answer(null, err, 404))
 
@@ -34,9 +34,9 @@ export default class BrandController extends BaseContext {
     @GET()
     @route('/:id')
     getById(req: Request, res: Response) {
-        const { BrandService } = this.di;
+        const { ModelsService } = this.di;
 
-        const result = BrandService.findById(req.params.id)
+        const result = ModelsService.findById(req.params.id)
             .then((data) => res.answer(data))
             .catch((err) => res.answer(null, err, 404))
     }
@@ -45,9 +45,9 @@ export default class BrandController extends BaseContext {
     @POST()
     @route('/save')
     save(req: Request, res: Response) {
-        const { BrandService } = this.di;
+        const { ModelsService } = this.di;
         console.log(req)
-        const result = BrandService.save(req.body, req.body.id)
+        const result = ModelsService.save(req.body, req.body.id)
             .then((data) => res.answer(data))
             .catch((err) => res.answer(null, err, 404))
     }
@@ -55,9 +55,9 @@ export default class BrandController extends BaseContext {
     @DELETE()
     @route('/delete/:id')
     delete(req: Request, res: Response) {
-        const { BrandService } = this.di;
+        const { ModelsService } = this.di;
 
-        const result = BrandService.delete(req.params.id)
+        const result = ModelsService.delete(req.params.id)
             .then((data) => res.answer(data))
             .catch((err) => res.answer(null, err, 404))
     }

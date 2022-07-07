@@ -37,7 +37,7 @@ class ProfileMenu extends React.Component<IProfileMenuProps, IProfileContentStat
 
 
         return (
-            <div className="mb-10">
+            <div className="mb-10 ">
                 <div className=" border-[1px] border-white/20 bg-customize-button/70 rounded-lg mr-2  mt-2 h-[850px]">
                     <div className=" text-start text-white mt-10 border-1 hover:bg-white/5 hover:text-yellow-600 h-10 mx-6">
                         <Link href={"/profile/PersonalData" }>

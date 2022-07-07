@@ -4,6 +4,7 @@ export interface IBUTProps {
     icon?: JSX.Element;
     text?: string;
     className?: string;
+    
     clickCallBack?: (component: string, value: string) => void;
     value?: string;
     selected?: string;

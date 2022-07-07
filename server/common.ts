@@ -3,8 +3,9 @@
 
 export enum ENTITIES {
     USERS  = "users",
-    BRANDS = "brands",
-    DEVICES = "devices"
+    BRENDS = "brands",
+    MODEL = "model",
+    CATEGORY = "category"
 }
 
 export interface SagaAction {
@@ -19,5 +20,6 @@ export interface ISagaAction {
         },
     };
 }
+
 
 export const isEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object

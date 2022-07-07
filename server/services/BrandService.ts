@@ -14,9 +14,15 @@ export default class BrandService extends BaseContext {
             .findById(brandId)
     }
 
-    public async save(body) {
+    public delete(brandId) {
         const { BrandModel } = this.di;
-        let page = await BrandModel.findById(body.id);
+        return BrandModel
+            .findByIdAndRemove(brandId)
+    }
+
+    public async save(body,id) {
+        const { BrandModel } = this.di;
+        let page = await BrandModel.findById(id);
         if (page) {
             page.set(body);
         } else {

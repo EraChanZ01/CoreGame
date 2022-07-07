@@ -6,13 +6,12 @@ import { prop, modelOptions, getModelForClass, DocumentType, Ref, pre } from '@t
 export class Brand {
 
     
-   
-    @prop({ 
-        type: String, 
-        unique: true, 
-        allowNull: false
-    })
+    @prop({type: String})
     public name: string;
+    
+
+    @prop({ type: Date , default:() => Date.now()})
+    createdAt: Date;
 
 }
 
