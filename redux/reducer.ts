@@ -3,7 +3,7 @@ import { AnyAction, combineReducers } from "redux";
 import { fromJS, Map } from 'immutable';
 import { REQUEST_RESULT } from "./models/Entities";
 import { CLEAR_IDENTITY, CLEAR_SSR_DATA, GET_IDENTITY, SET_IDENTITY, SET_SSR_DATA } from "./action";
-import { IIdentity, ROLE } from "server/constants";
+import { IIdentity, ROLE, IBrends } from "server/constants";
 
 
 
@@ -32,6 +32,7 @@ const nextReducer = (
 };
 
 const queryInitialState: any = null;
+
 const ssrReducer = (state = queryInitialState, action: any) => {
     switch (action.type) {
         case SET_SSR_DATA: {
@@ -83,6 +84,15 @@ const identity = (state = initialIdentity, action: any) => {
         }
     }
 }
+
+
+const initialbrends : IBrends = {
+    brendsId: null,
+    name: ' ',
+    img: ' ',
+};
+
+
 
 const initialEntities = fromJS({});
 function entities(state = initialEntities, action: any) {

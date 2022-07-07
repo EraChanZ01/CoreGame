@@ -1,32 +1,32 @@
 import  BaseContext  from '../BaseContext';
 
-export default class BrandService extends BaseContext {
+export default class BrendService extends BaseContext {
 
     public find() {
-        const { BrandModel } = this.di;
-        return BrandModel
+        const {BrendsModel} = this.di;
+        return BrendsModel
             .find({})
     }
 
-    public findById(brandId) {
-        const { BrandModel } = this.di;
-        return BrandModel
-            .findById(brandId)
+    public findById(brendId) {
+        const {BrendsModel} = this.di;
+        return BrendsModel
+            .findById(brendId)
     }
 
-    public delete(brandId) {
-        const { BrandModel } = this.di;
-        return BrandModel
-            .findByIdAndRemove(brandId)
+    public delete(brendId) {
+        const { BrendsModel } = this.di;
+        return BrendsModel
+            .findByIdAndRemove(brendId)
     }
 
     public async save(body,id) {
-        const { BrandModel } = this.di;
-        let page = await BrandModel.findById(id);
+        const { BrendsModel } = this.di;
+        let page = await BrendsModel.findById(id);
         if (page) {
             page.set(body);
         } else {
-            page = new BrandModel(body);
+            page = new BrendsModel(body);
         }
         return page.save();
     }

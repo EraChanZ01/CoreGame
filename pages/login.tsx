@@ -1,4 +1,3 @@
-
 import Layout from '../Components/Layout/Layout'
 import Link from 'next/link'
 import React from "react";
@@ -34,7 +33,7 @@ class Login extends React.Component<MyProps, MyState>  {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.entranceUser = this.entranceUser.bind(this);
+        //this.entranceUser = this.entranceUser.bind(this);
         
     };
 
@@ -72,12 +71,14 @@ class Login extends React.Component<MyProps, MyState>  {
             email: this.state.email,
             password: this.state.password
         }
+        console.log(loginUser, 'функция')
+        console.log(loginData ,'data')
         loginUser(loginData);
         // await this.entranceUser()
         // const data = await this.entranceUser();
     }
 
-    entranceUser() {
+    /*entranceUser() {
         const fullUrl = 'http://localhost:3000' + '/' + 'auth/login';
         console.log(5)
         const params: any = {
@@ -101,7 +102,7 @@ class Login extends React.Component<MyProps, MyState>  {
                 })
             );
 
-    }
+    }*/
 
     render() {
         /*console.log(this.getCookie('token'));

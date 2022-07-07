@@ -11,7 +11,7 @@ export default class ProfileContent extends React.Component<IProfileContentProps
 
     render() {
         const { children } = this.props;
-        console.log('&&&&&&&&&&&&&', children)
+        
         return (
 
             <div className=" bg-customize-blace111 relative mt-2">

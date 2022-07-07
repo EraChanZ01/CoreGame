@@ -47,7 +47,7 @@ export class Profile extends React.Component<MyProps> {
 
     getProfileContent() {
         const { router } = this.props;
-        console.log(router.query.index)
+        
         switch (router.query.index) {
             case PageParams.personalData:
                 return (<PersonalData />)

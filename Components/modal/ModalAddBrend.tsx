@@ -5,23 +5,27 @@ import identity from 'redux/models/identity'
 import saga from 'redux/decorators/saga';
 import { connect } from 'react-redux';
 import BrendsEntity from 'redux/models/brends'
-import { ILoginData } from 'server/constants';
+import { IBrends } from 'server/constants';
 import Entity from "redux/models/Entities";
+import xSave from "redux/models/Entities";
+import { response } from "express";
+
+
 
 export interface IModalAddProps {
 
     Disp: String,
     offDisp(why),
-   
+
 
 }
 
 export interface IModalAddState {
 
 
-name: String,
-email: String,
-img: String,
+    name: string,
+    email: string,
+    img: string,
 }
 
 
@@ -37,24 +41,75 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
             name: " ",
             email: " ",
             img: " ",
-            
 
-            
-            
-           
+
+
+
+
         };
 
-        this.handleChange = this.handleChange.bind(this)
-        this.openInput = this.openInput.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.openInput = this.openInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        //this.entranceUser = this.entranceUser.bind(this);
+
 
     };
 
 
-    handleSubmit(event) {
+    /*entranceUser() {
+        const fullUrl = 'http://localhost:3000';
+        console.log(5)
+        const params: any = {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                Authorization: 'bearer',
+            },
 
+        };
+
+        params['headers']['content-type'] = 'application/json';
+        params['body'] = JSON.stringify(this.state);
+        return fetch(fullUrl, params)
+            .then((response) => {
+                return response.json().then((json) => ({ json, response }));
+            }).then(({ json, response }) =>
+                Promise.resolve({
+                    success: response.ok ? true : false,
+                    response: json
+                })
+            );
+
+    }*/
+
+    async handleSubmit(event) {
+
+        const brendData: IBrends = {
+            brendsId: null,
+            name: this.state.name,
+            email: this.state.email,
+            img: this.state.img,
+        }
+
+        const xSave = new Entity
+
+        //await this.entranceUser()
+
+        xSave.xSave('http://localhost:3000' + '/' + 'save', brendData)
+
+        Router.push('/profile/PrfileBrend')
+        
+        BrendsEntity.saveBrends
+
+        console.log(xSave.xSave, 'save')
+        console.log(brendData, 'data')
+        console.log(Entity,'entity')
+        console.log(BrendsEntity.saveBrends,'121212')
 
     }
+
+
 
     handleChange(event) {
 
@@ -65,7 +120,7 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
             [name]: target.value
 
         });
-        
+
 
     }
 
@@ -77,21 +132,20 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
         file.forEach(file => {
             const reader = new FileReader()
             const div = document.getElementById('input-div')
-           
 
-            
+
+
 
             reader.onload = ev => {
-                console.log(ev.target.result)
 
-                
 
                 div.insertAdjacentHTML('afterend', `<img src="${ev.target.result}" class="absolute top-5 left-[70px]  h-64 w-64 rounded-xl z-50" /> `)
+                this.setState({ img: `${ev.target.result}` })
             }
 
             reader.readAsDataURL(file)
 
-           
+
         })
     }
 
@@ -117,7 +171,7 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
                     <div className=" static border-[1px] border-black h-64 w-64 mx-[70px] mt-5 bg-white/80 rounded-xl ">
                         <div className={`relative w-full h-full bg-white rounded-xl`} id="input-div">
-                            
+
                             <div className="block absolute border-2 border-black w-[120px] h-[120px] top-[66px] left-[66px] rounded-lg z-30">
                                 <input type="file" className=" " name="img" style={{ display: 'none' }} id="input-file" onChange={this.openInput} accept="image/*" />
                                 <label htmlFor="input-file" className=" rounded-lg block absolute border-2 border-black w-[40px] h-[40px] top-[37px] left-[37px] after:absolute after:border-b-2 after:top-[16px] after:w-8 after:border-black after:h-0 after:left-[2px]
@@ -145,11 +199,11 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
     }
 
 
-    
+
 
 };
 
-const mapStateToProps = (state,props) => {
+const mapStateToProps = (state, props) => {
     return {
     };
 }

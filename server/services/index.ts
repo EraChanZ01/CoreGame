@@ -1,5 +1,5 @@
 import { asClass, asValue } from 'awilix';
-import BrandService from './BrandService';
+import  BrendsService from './BrandService';
 import ModelsService from './UserService';
 import CategoryService from './CategoryService';
 import UserService from './UserService';
@@ -9,7 +9,7 @@ import UserService from './UserService';
 
 export interface IServicesContainer {
     UserService: UserService;
-    BrandService: BrandService;
+    BrendsService:  BrendsService;
     CategoryService: CategoryService;
     ModelsService: ModelsService;
 
@@ -17,7 +17,7 @@ export interface IServicesContainer {
 
 export default {
     UserService: asClass(UserService).singleton(),
-    BrandService: asClass(BrandService).singleton(),
+    BrendsService: asClass( BrendsService).singleton(),
     CategoryService: asClass(CategoryService).singleton(),
     ModelsService: asClass(CategoryService).singleton(),
 
