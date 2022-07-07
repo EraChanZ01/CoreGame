@@ -27,22 +27,24 @@ class Identity extends Entity {
         }
     }
 
+    
+
     @action()
     public * registerUser(data: any) {
-        // try {
-        //     const fn = this.submit('register', '/auth/register');
-        //     const { response } = yield call(fn, data);
-        //     const responseHasID = response && response[0] && Object.prototype.hasOwnProperty.call(response[0], '_id');
+         try {
+            const fn = this.submit('register', '/auth/register');
+            const { response } = yield call(fn, data);
+             const responseHasID = response && response[0] && Object.prototype.hasOwnProperty.call(response[0], '_id');
 
-        //     if (responseHasID && response[0].isOwnerCreate) {
-        //         const href = '/admin/users/list';
-        //         Router.replace(href, href, { shallow: true });
-        //     }
-        // } finally {
-        //     if (yield cancelled()) {
-        //         ('authorize yield cancelled');
-        //     }
-        // }
+             if (responseHasID && response[0].isOwnerCreate) {
+                const href = '/admin/users/list';
+                 Router.replace(href, href, { shallow: true });
+             }
+         } finally {
+             if (yield cancelled()) {
+                ('authorize yield cancelled');
+            }
+         }
     }
 }
 

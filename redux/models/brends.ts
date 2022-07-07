@@ -29,6 +29,11 @@ class BrendsEntity extends Entity {
         yield call(this.xRead, 'brends/all');
     }
 
+    @action()
+    public * saveBrends() {
+        yield call(this.xSave, 'brends/save');
+    }
+
 }
 
 export default new BrendsEntity();

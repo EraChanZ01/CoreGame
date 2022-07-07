@@ -54,27 +54,7 @@ export default class AuthController extends BaseContext {
         
     }
 
-    @POST()
-    @route('/device')
-
-    public device(req: Request, res: Response, next: NextFunction) {
-
-        
-        return this.di.passport.authenticate('local-adddevice', (errors, identity) => {
-            console.log(3)
-            if (errors) {
-                console.log('add_device__errors=', errors);
-                
-                res.answer(null, errors, httpStatus.BAD_REQUEST);
-            } else if (identity) {
-                res.answer(identity, 'You have successfully registered! Now you should be able to log in.');
-            } else {
-                
-                console.log('addDevice__catch__errors=', errors);
-                res.answer(null, 'Could not process the form.', httpStatus.BAD_REQUEST);
-            }
-        })(req, res, next);
-    }
+    
 
 
 

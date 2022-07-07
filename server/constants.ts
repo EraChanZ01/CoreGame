@@ -17,11 +17,19 @@ export interface IIdentity {
 }
 
 export interface IDevice {
-    deviceId: any;
+    brendsId: any;
     name: string,
     img: File,
-    price: number,
-    deviceinfo: string,
+   
+}
+
+
+export interface IBrends {
+    brendsId: any;
+    name: string,
+    email: string,
+    img: string,
+   
 }
 
 

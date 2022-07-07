@@ -35,6 +35,7 @@ export default class Mouse extends React.Component {
     render() {
 
         return (
+            <Layout>
             <div>
 
                 <div className=" bg-yellow-600" style={{ height: '100vh' }} onMouseMove={this.handleMouseMove} onKeyDown={this.OnKey} >
@@ -43,6 +44,7 @@ export default class Mouse extends React.Component {
                     <p>Текущее положение курсора мыши: ({this.state.x}, {this.state.y}, {this.state.key})</p>
                 </div>
             </div>
+            </Layout>
         );
     }
 }
