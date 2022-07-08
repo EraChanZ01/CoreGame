@@ -9,6 +9,8 @@ import { IBrends } from 'server/constants';
 import Entity from "redux/models/Entities";
 import xSave from "redux/models/Entities";
 import { response } from "express";
+import { AddBrendimg } from "./AddBrendImg";
+import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
 
 
 
@@ -16,7 +18,7 @@ export interface IModalAddProps {
 
     Disp: String,
     offDisp: (why) => void,
-    saveBrand: (data:IBrends ) => void,
+    saveBrand: (data: IBrends) => void,
 
 }
 
@@ -26,7 +28,13 @@ export interface IModalAddState {
     name: string,
     email: string,
     img: string,
+    files: any,
+    filesSize: string,
+    filesName: string,
+    dispOn: string
 }
+
+
 
 @saga(BrendsEntity)
 export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddState> {
@@ -40,9 +48,11 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
         this.state = {
             name: " ",
             email: " ",
-            img: " ",
-
-
+            img: "",
+            files: [],
+            filesSize: "",
+            filesName: "",
+            dispOn: "",
 
 
 
@@ -51,26 +61,28 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
         this.handleChange = this.handleChange.bind(this);
         this.openInput = this.openInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        
+        //this.Remove = this.Remove.bind(this);
+
 
 
     };
 
-
     
+
+   
 
     async handleSubmit(event) {
         const { saveBrand } = this.props;
-        const BrendsData : IBrends = {
+        const BrendsData: IBrends = {
             brendsId: null,
             email: this.state.email,
             name: this.state.name,
             img: this.state.img,
         }
         saveBrand(BrendsData);
-        
 
-        
+
+
 
     }
 
@@ -89,35 +101,62 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
     }
 
+    
+
     openInput(event) {
+
+        if(!event.target.files.length){
+            return
+        }
+
+        this.setState({dispOn: 'absolute' })
+
+
         this.handleChange(event)
 
         const file = Array.from(event.target.files)
 
+        this.setState({ files: event.target.files })
+
+        
         file.forEach(file => {
             const reader = new FileReader()
             const div = document.getElementById('input-div')
 
-
-
+            
 
             reader.onload = ev => {
 
+                
 
-                div.insertAdjacentHTML('afterend', `<img src="${ev.target.result}" class="absolute top-5 left-[70px]  h-64 w-64 rounded-xl z-50" /> `)
+               this.setState({ filesSize: file.size })
+               this.setState({ filesName: file.name })
+              
+
                 this.setState({ img: `${ev.target.result}` })
+
+
+                
             }
 
             reader.readAsDataURL(file)
 
+            
+            
 
         })
+
+        
+        
     }
-
-
+    
+    
 
     render() {
         const { Disp } = this.props;
+        
+        
+        
         return (
             <div className={` ${Disp ? Disp : 'hidden'} w-[400px] h-[520px] bg-customize-button inset-y-48 inset-x-[800px] fixed z-40 rounded-xl border-[1px] border-customize-text `}>
                 <button className="" type="button" onClick={() => this.props.offDisp('hidden')} >
@@ -134,17 +173,21 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
                 <div>
 
 
-                    <div className=" static border-[1px] border-black h-64 w-64 mx-[70px] mt-5 bg-white/80 rounded-xl ">
-                        <div className={`relative w-full h-full bg-white rounded-xl`} id="input-div">
+                    <div className=" static border-[1px] border-black h-64 w-64 mx-[70px] mt-5 bg-white/80  ">
+                        <div className={`relative w-full h-full bg-white `} id="input-div">
 
                             <div className="block absolute border-2 border-black w-[120px] h-[120px] top-[66px] left-[66px] rounded-lg z-30">
                                 <input type="file" className=" " name="img" style={{ display: 'none' }} id="input-file" onChange={this.openInput} accept="image/*" />
                                 <label htmlFor="input-file" className=" rounded-lg block absolute border-2 border-black w-[40px] h-[40px] top-[37px] left-[37px] after:absolute after:border-b-2 after:top-[16px] after:w-8 after:border-black after:h-0 after:left-[2px]
                              before:absolute before:border-l-2 before:top-[2px] before:w-0 before:border-black before:h-8 before:left-[17px]">
-
                                 </label>
+
+                                
+
                             </div>
+                            
                         </div>
+                        <AddBrendimg result={this.state.img} files={this.state.files} filesName={this.state.filesName} filesSize={this.state.filesSize} disp={this.state.dispOn}/>
                     </div>
 
                     <div className="  mt-10  mx-16 ">

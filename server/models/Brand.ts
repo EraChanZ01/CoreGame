@@ -8,6 +8,9 @@ export class Brends {
     
     @prop({type: String})
     public name: string;
+
+    @prop({type: String})
+    public img: string;
     
 
     @prop({ type: Date , default:() => Date.now()})

@@ -10,6 +10,7 @@ export interface ISpecificationProps {
 
 export default function Specification(props: ISpecificationProps) {
     const { title, icon, buttons, grid } = props;
+    
     const select =(
         <div className={`flex justify-center`}>
         <select className=' w-full flex bg-customize-blacegray2/0 border-b-[1px] text-center border-white/50'>
