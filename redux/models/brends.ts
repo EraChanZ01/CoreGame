@@ -12,7 +12,9 @@ export interface Brends {
 
     img: string;
 
-    name: string;  
+    name: string;
+    
+    email: string;
 
     createdAt: Date;
 

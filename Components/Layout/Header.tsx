@@ -10,6 +10,7 @@ interface IHeaderProps {
 function Header(props: IHeaderProps) {
     const { identity } = props;
     const router = useRouter();
+    
 
     return (
         <header className=" flex justify-between box-border items-center fixed right-0 left-0 top-0 p-[25px] m-auto  text-2xl bg-customize-blace111 border-b-[1px]  border-customize-slate200/50 text-white z-50">

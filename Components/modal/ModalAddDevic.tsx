@@ -57,7 +57,7 @@ export default class ModalAdd extends React.Component<IModalAddProps, IModalAddS
     render() {
         const { opDisp } = this.props;
         return (
-            <div className={`left-[453px] top-[150px] mx-[250px] mb-10 absolute  ${opDisp ? opDisp : 'hidden'} absolute bg-black w-[500px] justify-center z-50 border-y-[1px] border-x-[1px] border-yellow-600 `}>
+            <div className={`  ${opDisp ? opDisp : 'hidden'}  rounded-xl fixed top-32 left-[500px] bg-customize-button w-[500px] justify-center z-50 border-4 border-gray-500 `}>
                 <button><svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2"
                     width="25.000000pt" height="25.000000pt" viewBox="0 0 512.000000 512.000000"
                     preserveAspectRatio="xMidYMid meet">
@@ -70,16 +70,16 @@ export default class ModalAdd extends React.Component<IModalAddProps, IModalAddS
                 </button>
 
                 <div className=" border-white/20 text-center max-w-[350px]">
-                    <input className="center text-2xl bg-customize-text my-5 w-full brightness-200 border-y-[1px] border-x-[1px] border-yellow-900 rounded-lg text-white" placeholder='Название' name="name" onChange={this.handleChange} />
+                    <input className=" p-2 center text-2xl bg-customize-text/70 my-5 w-full brightness-200 border-4 border-gray-700/90 rounded-lg text-white" placeholder='Название' name="name" onChange={this.handleChange} />
 
-                    <input type="file" accept="png,jpg,svg" name="img" onChange={this.handleChange} className="text-white" />
+                    <input type="file"  accept="png,jpg,svg" name="img" onChange={this.handleChange} className="text-white" />
 
                     <div >
-                        <textarea className="resize rounded-md bg-customize-text w-full h-[350px] mt-10 brightness-200 border-y-[1px] border-x-[1px] border-yellow-900 text-white" name="info" onChange={this.handleChange}></textarea>
+                        <textarea className="resize rounded-md bg-customize-text/70 w-full h-[350px] mt-10 brightness-200 border-4 border-gray-700/90 text-white" name="info" onChange={this.handleChange}></textarea>
 
                         <div className="my-10 border-white/20">
-                            <input className=" bg- my-5 w-full h-10 bg-customize-text brightness-200 border-y-[1px] border-x-[1px] border-yellow-900 rounded-lg " placeholder='Цена' name="price" onChange={this.handleChange} />
-                            <button className="border-2 rounded-xl w-full h-10 text-black text-xl bg-yellow-600 border-black" type="button" name="submit" onClick={this.handleSubmit} >
+                            <input className=" p-2 my-5 w-full h-10 bg-customize-text/70 brightness-200 border-4 border-gray-700/90 rounded-lg " placeholder='Цена' name="price" onChange={this.handleChange} />
+                            <button className="border-2 rounded-xl w-full h-10 text-black text-xl bg-yellow-600 border-gray-700/90" type="button" name="submit" onClick={this.handleSubmit} >
                                 Добавить
                             </button>
                         </div>

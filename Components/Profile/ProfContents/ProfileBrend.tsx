@@ -1,50 +1,99 @@
 import ModalAddBrend from "../../modal/ModalAddBrend"
 import React from "react";
+import Link from 'next/link'
+import { threadId } from 'worker_threads';
+import Router, { withRouter } from 'next/router'
+import identity from 'redux/models/identity'
+import saga from 'redux/decorators/saga';
+import { connect } from 'react-redux';
+import { ILoginData } from 'server/constants';
+import BrendsEntity from 'redux/models/brends'
+import ListBrends from "./Brend/ListBrends";
+import brends from "redux/models/brends";
+
 
 
 interface MyProps {
-   
 
+    brends: any,
+    fetchAllBrend: () => void,
 }
 
 interface MyState {
     onDisp: string,
     setingDisp: string,
+    brend: string,
+    get: boolean
 }
 
-
-export default class PrfileBrend extends React.Component<MyProps, MyState> {
+@saga(BrendsEntity)
+export class PrfileBrend extends React.Component<MyProps, MyState> {
 
     constructor(props) {
         super(props);
         this.state = {
             onDisp: '',
             setingDisp: '',
+            get: false,
+            brend: '',
 
         };
 
         this.openDisp = this.openDisp.bind(this);
         this.offDisp = this.offDisp.bind(this)
+        this.Get = this.Get.bind(this)
 
     };
+
+
+    async Get() {
+
+        await this.props.fetchAllBrend()
+
+
+
+        this.setState({ get: true })
+
+       
+
+        
+
+    }
 
     openDisp(event) {
         this.setState({ setingDisp: 'brightness-50' });
         this.setState({ onDisp: 'flex' });
+        
 
     }
 
     offDisp(why) {
         this.setState({ setingDisp: 'brightness-100' })
         this.setState({ onDisp: `${why} ` });
+
     }
 
-
-
-
-
-
     render() {
+
+
+        //const brends = [
+           // { id: 1, name: 'Samsung', img: '' },
+           // { id: 2, name: 'Intel', img: '' },
+        //]
+
+
+        if (this.state.get == false) {
+
+            this.Get()
+
+
+        }
+
+
+        
+        const { brends } = this.props;
+        
+
 
 
         return (
@@ -67,7 +116,9 @@ export default class PrfileBrend extends React.Component<MyProps, MyState> {
                         </div>
                         <div className="border-[1px] rounded-xl drop-shadow-2xl h-96 mt-8 mx-10 overflow-auto ">
                             <div className="">
-
+                                <div>
+                                <ListBrends brends={brends} />
+                                </div>
 
                             </div >
                             <div className="">
@@ -82,3 +133,14 @@ export default class PrfileBrend extends React.Component<MyProps, MyState> {
     }
 
 }
+
+
+const mapStateToProps = (state, props) => {
+    const brends = state.entities.get("brands");
+    return {
+        brends
+    };
+}
+
+const login_connected = connect(mapStateToProps, BrendsEntity.triggers())(PrfileBrend);
+export default withRouter(login_connected);

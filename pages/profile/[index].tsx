@@ -11,6 +11,9 @@ import { withRouter } from 'next/router';
 import { connect } from 'react-redux';
 import PersonalData from '../../Components/Profile/ProfContents/PersonalData'
 import PrfileBrend from '../../Components/Profile/ProfContents/ProfileBrend'
+import ProfileDevice from '../../Components/Profile/ProfContents/ProfileDevice'
+import BrendsEntity from 'redux/models/brends'
+import saga from 'redux/decorators/saga';
 
 
 interface MyProps extends WithRouterProps {
@@ -20,20 +23,24 @@ interface MyProps extends WithRouterProps {
 
 interface MyState {
 
+
+
 }
 
 export enum PageParams {
     personalData = "PersonalData",
-    prfileBrend = "PrfileBrend"
+    prfileBrend = "PrfileBrend",
+    profileDevice = "ProfileDevice"
 }
 
 
-
-export class Profile extends React.Component<MyProps> {
+@saga(BrendsEntity)
+export class Profile extends React.Component<MyProps, MyState> {
 
     constructor(props) {
         super(props);
         this.state = {
+
 
         };
 
@@ -47,14 +54,23 @@ export class Profile extends React.Component<MyProps> {
 
     getProfileContent() {
         const { router } = this.props;
-        
+
+
+
         switch (router.query.index) {
             case PageParams.personalData:
+
                 return (<PersonalData />)
                 break;
 
             case PageParams.prfileBrend:
+
                 return (<PrfileBrend />)
+                break;
+
+            case PageParams.profileDevice:
+
+                return (<ProfileDevice />)
                 break;
         }
     }
@@ -94,11 +110,16 @@ export class Profile extends React.Component<MyProps> {
 
 const mapStateToProps = (state, props) => {
     const users = state.entities.get('users');
+    const entities = state.entities;
     return {
-        users,
+        users, entities
     };
 }
 
-const home = connect(mapStateToProps)(Profile);
+const home = connect(mapStateToProps, BrendsEntity.triggers())(Profile);
 
 export default withRouter(home);
+
+
+
+

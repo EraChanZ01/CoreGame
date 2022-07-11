@@ -1,19 +1,22 @@
 import { WithRouterProps } from "next/dist/client/with-router";
 import Link from "next/link"
-import Router from "next/router"
-import { withRouter } from 'next/router';
+import Router, { withRouter } from 'next/router'
 import React from "react"
+import BrendsEntity from 'redux/models/brends'
+import saga from 'redux/decorators/saga';
+import { connect } from 'react-redux';
 
 
 interface IProfileMenuProps extends WithRouterProps {
 
+    fetchAllBrend: () => void,
 }
 
 interface IProfileContentState {
 
 }
 
-
+@saga(BrendsEntity)
 class ProfileMenu extends React.Component<IProfileMenuProps, IProfileContentState> {
 
 
@@ -28,9 +31,15 @@ class ProfileMenu extends React.Component<IProfileMenuProps, IProfileContentStat
         // this.handleChange = this.handleChange.bind(this);
         //this.handleSubmit = this.handleSubmit.bind(this);
         //this.registerUser = this.registerUser.bind(this);
+        this.Get = this.Get.bind(this)
     };
 
 
+
+    Get(event){
+
+        this.props.fetchAllBrend()
+    }
 
     render() {
 
@@ -50,9 +59,18 @@ class ProfileMenu extends React.Component<IProfileMenuProps, IProfileContentStat
                     </div>
                     <div className=" text-start text-white mt-10 border-1 hover:bg-white/5 hover:text-yellow-600 h-10 mx-6">
                         <Link href={"/profile/PrfileBrend" }>
-                            <button >
+                            <button onClick={this.Get} type="button">
 
                                 <p className="p-2">Бренды</p>
+
+                            </button>
+                        </Link>
+                    </div>
+                    <div className=" text-start text-white mt-10 border-1 hover:bg-white/5 hover:text-yellow-600 h-10 mx-6">
+                        <Link href={"/profile/ProfileDevice" }>
+                            <button onClick={this.Get} type="button">
+
+                                <p className="p-2">Дивайсы</p>
 
                             </button>
                         </Link>
@@ -63,5 +81,14 @@ class ProfileMenu extends React.Component<IProfileMenuProps, IProfileContentStat
     }
 }
 
+const mapStateToProps = (state, props) => {
+    const entities = state.entities;
+    return {
+        entities
+    };
+}
 
-export default withRouter(ProfileMenu);
+const login_connected = connect(mapStateToProps, BrendsEntity.triggers())(ProfileMenu);
+export default withRouter(login_connected);
+
+

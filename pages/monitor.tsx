@@ -48,23 +48,11 @@ class Monitor extends React.Component<MyProps, MyState> {
 	});
 
     
-    addDevice = (data) => {
-        const { saveDevice } = this.props;
-        saveDevice(data);
-    }
 
-    openDisp(event) {
-        this.setState({ opDisp: 'brightness-50' });
-        this.setState({ onDisp: 'flex' });
-        console.log(3)
-    }
 
-    offDisp(event) {
+    
 
-        this.setState({ opDisp: 'brightness-100' });
-        this.setState({ onDisp: 'hidden' });
-        console.log(3)
-    }
+    
 
 
 
@@ -73,7 +61,7 @@ class Monitor extends React.Component<MyProps, MyState> {
         return (
             <form className=" bg-customize-blacegray relative">
                 <Layout>
-                    <ModallAdd opDisp={this.state.onDisp} addDevice={this.addDevice}/>
+                    
                     <Store opDisp={this.state.opDisp}>
                         <div className={` bg-customize-blacegray text-center text-white font-bold relative ${this.state.opDisp ? this.state.opDisp : ""}  z-40 `}>
 
@@ -85,11 +73,7 @@ class Monitor extends React.Component<MyProps, MyState> {
 
 
 
-                            <div>
-                                <button className="z-30" onClick={this.openDisp} type="button">
-                                    Добавить двайс
-                                </button>
-                            </div>
+                    
 
 
                             <div className="flex justify-between lg:mx-[90px] xl:mx-[250px] mb-10 z-30">

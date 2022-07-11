@@ -14,6 +14,7 @@ import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
 
 
 
+
 export interface IModalAddProps {
 
     Disp: String,
@@ -31,7 +32,8 @@ export interface IModalAddState {
     files: any,
     filesSize: string,
     filesName: string,
-    dispOn: string
+    dispOn: string,
+    imgg: string,
 }
 
 
@@ -53,6 +55,7 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
             filesSize: "",
             filesName: "",
             dispOn: "",
+            imgg: " ",
 
 
 
@@ -61,14 +64,18 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
         this.handleChange = this.handleChange.bind(this);
         this.openInput = this.openInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        //this.Remove = this.Remove.bind(this);
+        this.Dispoff = this.Dispoff.bind(this);
 
 
 
     };
 
-    
-
+    Dispoff(off){
+        this.setState({ dispOn: `${off}`})
+        this.setState({ img: ' ' })
+        this.setState({ filesName: ' ' })
+        this.setState({ filesSize: ' ' })
+    }
    
 
     async handleSubmit(event) {
@@ -80,9 +87,6 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
             img: this.state.img,
         }
         saveBrand(BrendsData);
-
-
-
 
     }
 
@@ -98,64 +102,41 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
         });
 
-
     }
 
-    
-
     openInput(event) {
-
-        if(!event.target.files.length){
-            return
-        }
 
         this.setState({dispOn: 'absolute' })
 
 
-        this.handleChange(event)
-
         const file = Array.from(event.target.files)
-
+       
+        
+        
         this.setState({ files: event.target.files })
 
-        
         file.forEach(file => {
             const reader = new FileReader()
             const div = document.getElementById('input-div')
 
-            
-
             reader.onload = ev => {
-
-                
 
                this.setState({ filesSize: file.size })
                this.setState({ filesName: file.name })
-              
-
-                this.setState({ img: `${ev.target.result}` })
-
-
-                
+                this.setState({ img: `${ev.target.result}` })           
             }
-
             reader.readAsDataURL(file)
-
-            
-            
-
         })
 
-        
+        console.log(document.getElementById('input-div'))
         
     }
+    
     
     
 
     render() {
         const { Disp } = this.props;
-        
-        
         
         return (
             <div className={` ${Disp ? Disp : 'hidden'} w-[400px] h-[520px] bg-customize-button inset-y-48 inset-x-[800px] fixed z-40 rounded-xl border-[1px] border-customize-text `}>
@@ -177,7 +158,7 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
                         <div className={`relative w-full h-full bg-white `} id="input-div">
 
                             <div className="block absolute border-2 border-black w-[120px] h-[120px] top-[66px] left-[66px] rounded-lg z-30">
-                                <input type="file" className=" " name="img" style={{ display: 'none' }} id="input-file" onChange={this.openInput} accept="image/*" />
+                                <input type="file" className=" " name="imgg" style={{ display: 'none' }} id="input-file" onChange={this.openInput} accept="image/*" />
                                 <label htmlFor="input-file" className=" rounded-lg block absolute border-2 border-black w-[40px] h-[40px] top-[37px] left-[37px] after:absolute after:border-b-2 after:top-[16px] after:w-8 after:border-black after:h-0 after:left-[2px]
                              before:absolute before:border-l-2 before:top-[2px] before:w-0 before:border-black before:h-8 before:left-[17px]">
                                 </label>
@@ -187,7 +168,9 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
                             </div>
                             
                         </div>
-                        <AddBrendimg result={this.state.img} files={this.state.files} filesName={this.state.filesName} filesSize={this.state.filesSize} disp={this.state.dispOn}/>
+
+                        <AddBrendimg result={this.state.img} files={this.state.files} filesName={this.state.filesName} filesSize={this.state.filesSize} disp={this.state.dispOn} Dispoff={this.Dispoff} />
+
                     </div>
 
                     <div className="  mt-10  mx-16 ">
@@ -213,6 +196,7 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
 const mapStateToProps = (state, props) => {
     return {
+        
     };
 }
 
