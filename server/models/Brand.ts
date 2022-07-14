@@ -15,7 +15,10 @@ export class Brends {
 
     @prop({type: String})
     public email: string;
-    
+
+
+    @prop({type: Object})
+    public categoryName: Object;
 
     @prop({ type: Date , default:() => Date.now()})
     createdAt: Date;

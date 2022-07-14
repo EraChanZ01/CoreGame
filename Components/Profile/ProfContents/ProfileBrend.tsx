@@ -94,7 +94,7 @@ export class PrfileBrend extends React.Component<MyProps, MyState> {
         const { brends } = this.props;
         
 
-
+        
 
         return (
             <div className={` relative mb-20 border-[1px] border-white/20 bg-customize-button/70 w-full h-[850px] rounded-lg`}>
@@ -114,7 +114,7 @@ export class PrfileBrend extends React.Component<MyProps, MyState> {
                                 </button>
                             </div>
                         </div>
-                        <div className="border-[1px] rounded-xl drop-shadow-2xl h-96 mt-8 mx-10 overflow-auto ">
+                        <div className="border-[1px] rounded-xl drop-shadow-2xl h-96 mt-8 mx-5 overflow-auto " >
                             <div className="">
                                 <div>
                                 <ListBrends brends={brends} />
@@ -137,8 +137,11 @@ export class PrfileBrend extends React.Component<MyProps, MyState> {
 
 const mapStateToProps = (state, props) => {
     const brends = state.entities.get("brands");
+    
+    console.log(brends)
     return {
-        brends
+        brends,
+        
     };
 }
 

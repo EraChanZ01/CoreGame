@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Router, { withRouter } from 'next/router'
 import saga from 'redux/decorators/saga';
 import { connect } from 'react-redux';
-import ModallAdd from '../../modal/ModalAddDevic'
+import ModalAddDevic from '../../modal/ModalAddDevic'
 
 
 
@@ -67,7 +67,7 @@ export default class ProfileDevice extends React.Component<MyProps, MyState> {
     render() {
         return (
             <div className="relative mb-20 border-[1px] border-white/20 bg-customize-button/70 w-full h-[850px] rounded-lg">
-                <ModallAdd opDisp={this.state.onDisp} addDevice={this.addDevice} />
+                <ModalAddDevic opDisp={this.state.onDisp} addDevice={this.addDevice} />
                 <div className="flex">
                     <div className="">
                         <p className="ml-16 mt-5 text-xl text-white">Доступные Дивайсы</p>

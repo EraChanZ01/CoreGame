@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 import { route, GET, POST, DELETE, before } from 'awilix-express';
 import httpStatus from '../../http-status';
 
-import { IIdentity, IDevice } from '../constants'
+import { IIdentity} from '../constants'
 
 @route('/auth')
 

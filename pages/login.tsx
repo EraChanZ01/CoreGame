@@ -68,7 +68,7 @@ class Login extends React.Component<MyProps, MyState>  {
     async handleSubmit() {
         const { loginUser } = this.props;
         const loginData : ILoginData = {
-            email: this.state.email,
+            userEmail: this.state.email,
             password: this.state.password
         }
         

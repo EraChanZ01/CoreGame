@@ -143,6 +143,7 @@ export default class Entity {
         return this.actionRequest(uri, method, data);
     }
 
+    
     public xSave(uri: string, data: any = {}) {
         return this.actionRequest(uri, HTTP_METHOD.POST, data);
     }

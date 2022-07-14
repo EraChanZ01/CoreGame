@@ -4,6 +4,17 @@ export enum ROLE {
     ADMIN = 'admin',
 }
 
+export interface Ireg {
+    userEmail:string,
+    firstName: string,
+    lastName: string,
+    role: ROLE,
+    password: string,
+    image: string,
+    phoneNumber: number,
+    location: string
+}
+
 
 export interface IIdentity {
     userId: any;
@@ -16,10 +27,15 @@ export interface IIdentity {
     role: ROLE;
 }
 
-export interface IDevice {
-    brendsId: any;
+export interface IModel {
     name: string,
-    img: File,
+    price: number,
+    img: string,
+    info: string,
+    categoryName: string,
+    brendName: string,
+    
+
    
 }
 
@@ -27,6 +43,7 @@ export interface IDevice {
 export interface IBrends {
     brendsId: any;
     name: string,
+    categoryName: any,
     email: string,
     img: string,
    
@@ -34,6 +51,6 @@ export interface IBrends {
 
 
 export interface ILoginData {
-    email: string,
+    userEmail: string,
     password: string,
 }

@@ -86,11 +86,7 @@ const identity = (state = initialIdentity, action: any) => {
 }
 
 
-const initialbrends : IBrends = {
-    brendsId: null,
-    name: ' ',
-    img: ' ',
-};
+
 
 
 

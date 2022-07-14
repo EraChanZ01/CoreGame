@@ -8,7 +8,6 @@ import rootReducer from './reducer';
 import { all } from 'redux-saga/effects'
 import { fromJS, List, Map } from 'immutable';
 import Entity from './models/Entities';
-
 import './models/users';
 
 declare global {

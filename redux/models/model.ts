@@ -39,6 +39,11 @@ class ModelsEntity extends Entity {
         yield call(this.xRead, 'models/all');
     }
 
+    @action()
+    public * saveModel(data) {
+        yield call(this.xSave, 'models/save', data);
+    }
+
 }
 
 export default new ModelsEntity();

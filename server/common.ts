@@ -2,10 +2,11 @@
 
 
 export enum ENTITIES {
-    USERS  = "users",
+    USERS = "users",
     BRENDS = "brands",
-    MODEL = "model",
-    CATEGORY = "category"
+    MODEL = "models",
+    CATEGORY = "category",
+    DEVICE = "device"
 }
 
 export interface SagaAction {

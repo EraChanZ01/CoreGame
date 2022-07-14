@@ -1,6 +1,6 @@
 import { asClass, asValue } from 'awilix';
 import  BrendsService from './BrandService';
-import ModelsService from './UserService';
+import ModelsService from './ModelService';
 import CategoryService from './CategoryService';
 import UserService from './UserService';
 
@@ -19,6 +19,6 @@ export default {
     UserService: asClass(UserService).singleton(),
     BrendsService: asClass( BrendsService).singleton(),
     CategoryService: asClass(CategoryService).singleton(),
-    ModelsService: asClass(CategoryService).singleton(),
+    ModelsService: asClass(ModelsService).singleton(),
 
 }

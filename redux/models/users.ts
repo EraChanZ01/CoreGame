@@ -14,7 +14,7 @@ export enum ROLE {
 export interface User {
     id: string;
 
-    Useremail: string;  
+    userEmail: string;  
 
     firstName: string;
 
@@ -41,6 +41,11 @@ class UserEntity extends Entity {
     @action()
     public * fetchAllUsers() {
         yield call(this.xRead, 'users/all');
+    }
+
+    @action()
+    public * saveUsers(data) {
+        yield call(this.xSave, 'brends/save', data);
     }
 
 }

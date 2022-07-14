@@ -12,6 +12,8 @@ export interface Brends {
 
     img: string;
 
+    categoryName: any;
+
     name: string;
     
     email: string;
@@ -38,6 +40,12 @@ class BrendsEntity extends Entity {
     @action()
     public * saveBrand(data) {
         yield call(this.xSave, 'brends/save', data);
+    }
+
+
+    @action()
+    public * deleteBrand(data) {
+        yield call(this.xSave,'delete/:id', data);
     }
 
 }

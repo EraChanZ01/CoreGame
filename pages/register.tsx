@@ -3,10 +3,15 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/Link'
 import React from "react";
-import Router from 'next/router'
+import Router, { withRouter } from 'next/router'
+import identity from 'redux/models/identity'
+import saga from 'redux/decorators/saga';
+import { connect } from 'react-redux';
+import { Ireg } from 'server/constants';
 
 interface MyProps {
 
+    registerUser: (data: Ireg) => void
 }
 
 interface MyState {
@@ -22,7 +27,7 @@ interface MyState {
 }
 
 // Cоздание класса Reg
-export default class Reg extends React.Component<MyProps, MyState> {
+export class Reg extends React.Component<MyProps, MyState> {
 
 
     //Конструктор
@@ -43,7 +48,7 @@ export default class Reg extends React.Component<MyProps, MyState> {
         //Забинженые функции
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.registerUser = this.registerUser.bind(this);
+       //this.registerUser = this.registerUser.bind(this);
     };
 
 
@@ -61,7 +66,7 @@ export default class Reg extends React.Component<MyProps, MyState> {
             [name]: target.value
 
         });
-        
+
 
     }
 
@@ -69,10 +74,23 @@ export default class Reg extends React.Component<MyProps, MyState> {
     async handleSubmit(event) {
         if (this.state.password == this.state.rePassword) {
             event.preventDefault();
+            const { registerUser } = this.props;
+            const regData: Ireg = {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                role: null,
+                image: null,
+                location: this.state.location,
+                phoneNumber: this.state.phoneNumber,
+                userEmail: this.state.email,
+                password: this.state.password,
 
-            await this.registerUser()
+            }
+
+            registerUser(regData);
+            //await this.registerUser()
             Router.push('/')
-            
+
         }
         else {
             this.setState({ passwordDoesNotMatch: true });
@@ -80,7 +98,7 @@ export default class Reg extends React.Component<MyProps, MyState> {
     }
 
     //функия регистрации
-    registerUser() {
+    /*registerUser() {
         let fullUrl = 'http://localhost:3000' + '/' + 'auth/signup';
         const params: any = {
             method: 'POST',
@@ -102,7 +120,7 @@ export default class Reg extends React.Component<MyProps, MyState> {
             );
         console.log(this.registerUser)
 
-    }
+    }*/
 
 
 
@@ -218,3 +236,11 @@ export default class Reg extends React.Component<MyProps, MyState> {
         )
     }
 }
+
+const mapStateToProps = (state, props) => {
+    return {
+    };
+}
+
+const login_connected = connect(mapStateToProps, identity.triggers())(Reg);
+export default withRouter(login_connected);

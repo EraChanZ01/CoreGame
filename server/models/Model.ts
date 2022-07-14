@@ -20,6 +20,12 @@ export class Models {
     @prop({type: String})
     public image: string;  
 
+    @prop({type: String})
+    public categoryName: string;
+
+    @prop({type: String})
+    public categoryBrend: string;
+
 
 
 

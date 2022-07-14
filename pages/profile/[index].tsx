@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useContext } from "react";
 import Layout from "../../Components/Layout/Layout"
 import Link from "next/Link"
@@ -117,7 +116,6 @@ const mapStateToProps = (state, props) => {
 }
 
 const home = connect(mapStateToProps, BrendsEntity.triggers())(Profile);
-
 export default withRouter(home);
 
 

@@ -25,7 +25,7 @@ export interface Device {
 class DeviceEntity extends Entity {
 
     constructor() {
-        super(ENTITIES.DEVICES);
+        super(ENTITIES.DEVICE);
     }
 
     @action()

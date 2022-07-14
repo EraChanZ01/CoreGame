@@ -34,6 +34,16 @@ export interface IModalAddState {
     filesName: string,
     dispOn: string,
     imgg: string,
+    monitor: string,
+    korpus: string,
+    video: string,
+    bp: string,
+    memory: string,
+    cooling: string,
+    ssd: string,
+    hdd: string,
+    cpu: string,
+    other: string,
 }
 
 
@@ -48,15 +58,25 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
 
         this.state = {
-            name: " ",
-            email: " ",
+
+            name: "",
+            email: "",
             img: "",
             files: [],
             filesSize: "",
             filesName: "",
             dispOn: "",
-            imgg: " ",
-
+            imgg: "",
+            monitor: "",
+            korpus: "",
+            video: "",
+            bp: "",
+            memory: "",
+            cooling: "",
+            ssd: "",
+            hdd: "",
+            cpu: "",
+            other: "",
 
 
         };
@@ -70,23 +90,27 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
     };
 
-    Dispoff(off){
-        this.setState({ dispOn: `${off}`})
+    Dispoff(off) {
+        this.setState({ dispOn: `${off}` })
         this.setState({ img: ' ' })
         this.setState({ filesName: ' ' })
         this.setState({ filesSize: ' ' })
     }
-   
+
 
     async handleSubmit(event) {
+        
         const { saveBrand } = this.props;
         const BrendsData: IBrends = {
             brendsId: null,
             email: this.state.email,
             name: this.state.name,
             img: this.state.img,
+            categoryName: [this.state.korpus, this.state.monitor, this.state.cpu, this.state.ssd,this.state.hdd,this.state.cooling,this.state.bp,this.state.other,this.state.memory,this.state.video],
         }
         saveBrand(BrendsData);
+
+    
 
     }
 
@@ -106,13 +130,13 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
     openInput(event) {
 
-        this.setState({dispOn: 'absolute' })
+        this.setState({ dispOn: 'absolute' })
 
 
         const file = Array.from(event.target.files)
-       
-        
-        
+
+
+
         this.setState({ files: event.target.files })
 
         file.forEach(file => {
@@ -121,25 +145,26 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
             reader.onload = ev => {
 
-               this.setState({ filesSize: file.size })
-               this.setState({ filesName: file.name })
-                this.setState({ img: `${ev.target.result}` })           
+                this.setState({ filesSize: file.size })
+                this.setState({ filesName: file.name })
+                this.setState({ img: `${ev.target.result}` })
             }
             reader.readAsDataURL(file)
         })
 
         console.log(document.getElementById('input-div'))
+
         
     }
-    
-    
-    
+
+
+
 
     render() {
         const { Disp } = this.props;
-        
+
         return (
-            <div className={` ${Disp ? Disp : 'hidden'} w-[400px] h-[520px] bg-customize-button inset-y-48 inset-x-[800px] fixed z-40 rounded-xl border-[1px] border-customize-text `}>
+            <div className={` ${Disp ? Disp : 'hidden'} w-[800px] h-[650px] bg-customize-button inset-y-[100px] inset-x-[550px] fixed z-40 rounded-xl border-[1px] border-customize-text `}>
                 <button className="" type="button" onClick={() => this.props.offDisp('hidden')} >
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2"
                         width="25.000000pt" height="25.000000pt" viewBox="0 0 512.000000 512.000000"
@@ -151,36 +176,77 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
                         </g>
                     </svg>
                 </button>
-                <div>
+                <div className=" w-full">
 
+                    <div className="flex w-[700px]">
+                        <div className=" static border-[1px] border-black h-64 w-64 mx-[70px] mt-5 bg-white/80  ">
+                            <div className={`relative w-full h-full bg-white `} id="input-div">
 
-                    <div className=" static border-[1px] border-black h-64 w-64 mx-[70px] mt-5 bg-white/80  ">
-                        <div className={`relative w-full h-full bg-white `} id="input-div">
-
-                            <div className="block absolute border-2 border-black w-[120px] h-[120px] top-[66px] left-[66px] rounded-lg z-30">
-                                <input type="file" className=" " name="imgg" style={{ display: 'none' }} id="input-file" onChange={this.openInput} accept="image/*" />
-                                <label htmlFor="input-file" className=" rounded-lg block absolute border-2 border-black w-[40px] h-[40px] top-[37px] left-[37px] after:absolute after:border-b-2 after:top-[16px] after:w-8 after:border-black after:h-0 after:left-[2px]
+                                <div className="block absolute border-2 border-black w-[120px] h-[120px] top-[66px] left-[66px] rounded-lg z-30">
+                                    <input type="file" className=" " name="imgg" style={{ display: 'none' }} id="input-file" onChange={this.openInput} accept="image/*" />
+                                    <label htmlFor="input-file" className=" rounded-lg block absolute border-2 border-black w-[40px] h-[40px] top-[37px] left-[37px] after:absolute after:border-b-2 after:top-[16px] after:w-8 after:border-black after:h-0 after:left-[2px]
                              before:absolute before:border-l-2 before:top-[2px] before:w-0 before:border-black before:h-8 before:left-[17px]">
-                                </label>
+                                    </label>
 
-                                
+
+
+                                </div>
 
                             </div>
-                            
+
+                            <AddBrendimg result={this.state.img} files={this.state.files} filesName={this.state.filesName} filesSize={this.state.filesSize} disp={this.state.dispOn} Dispoff={this.Dispoff} />
+
                         </div>
-
-                        <AddBrendimg result={this.state.img} files={this.state.files} filesName={this.state.filesName} filesSize={this.state.filesSize} disp={this.state.dispOn} Dispoff={this.Dispoff} />
-
+                        <div className=" mt-10 w-[300px]">
+                            <input type="text" className=" mt-10 w-[300px] h-8  bg-customize-text/60 p-1" name="name" placeholder='Название' onChange={this.handleChange} />
+                            <input type="email" className=" mt-10 w-[300px] h-8 bg-customize-text/60 p-1" name="email" placeholder='Почта' onChange={this.handleChange} />
+                        </div>
                     </div>
+                    <div className=" ml-[70px] mt-4 text-yellow-600/80">
+                        <div className="w-[150px]">
+                            <div className="flex h-7 ">
+                                <input type="checkbox" className="w-5 h-5" name="korpus" value="Корпус" onChange={this.handleChange} /><p className="ml-2"> Корпус </p>
+                            </div>
+                            <div className="flex h-7">
+                                <input type="checkbox" className="w-5 h-5 " name="monitor" value="Монитор" onChange={this.handleChange} /> <p className="ml-2"> Монитор</p>
+                            </div>
+                            <div className="flex h-7">
 
-                    <div className="  mt-10  mx-16 ">
-                        <input type="text" className=" w-full h-8 rounded-lg bg-white/80 p-1" name="name" placeholder='Название' onChange={this.handleChange} />
-                    </div>
-                    <div className=" mt-10 mx-16">
-                        <input type="email" className=" w-full h-8 rounded-lg bg-white/80 p-1" name="email" placeholder='Почта' onChange={this.handleChange} />
+                                <input type="checkbox" className="w-5 h-5" name="video" value="Видеокарта" onChange={this.handleChange}/> <p className="ml-2"> Видеокарта</p>
+                            </div>
+                            <div className="flex h-7">
+
+                                <input type="checkbox" className="w-5 h-5 " name="bp" value="Блок питание" onChange={this.handleChange}/> <p className="ml-2"> Блок питание</p>
+                            </div>
+                            <div className="flex h-7">
+
+                                <input type="checkbox" className="w-5 h-5" name="memory" value="Модуль памяти" onChange={this.handleChange}/> <p className="ml-2"> Модуль памяти </p>
+                            </div>
+                        </div>
+                        <div className="">
+                            <div className="flex h-7">
+                                <input type="checkbox" className="w-5 h-5 " name="cooling" value="Система охлаждения" onChange={this.handleChange}/> <p className="ml-2"> Система охлаждения </p>
+                            </div>
+
+                            <div className="flex h-7">
+                                <input type="checkbox" className="w-5 h-5" name="ssd" value="SSD" onChange={this.handleChange}/> <p className="ml-2"> SSD</p>
+                            </div>
+
+                            <div className="flex h-7">
+                                <input type="checkbox" className="w-5 h-5 " name="hdd" value="HDD" onChange={this.handleChange}/> <p className="ml-2"> HDD</p>
+                            </div>
+                            <div className="flex h-7">
+
+                                <input type="checkbox" className="w-5 h-5" name="cpu" value="Процесор" onChange={this.handleChange}/> <p className="ml-2"> Процесор</p>
+                            </div>
+                            <div className="flex h-7">
+
+                                <input type="checkbox" className="w-5 h-5" name="other" value="Прочее" onChange={this.handleChange}/> <p className="ml-2"> Прочее</p>
+                            </div>
+                        </div>
                     </div>
                     <div className=" flex justify-center mt-5">
-                        <button className="bg-yellow-600 rounded-lg h-8 w-full mx-[65px] text-white" type='button' onClick={this.handleSubmit}>
+                        <button className="bg-yellow-600 rounded-lg h-8 w-full mx-[150px] text-white" type='button' onClick={this.handleSubmit}>
                             Добавить
                         </button>
                     </div>
@@ -196,7 +262,7 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
 const mapStateToProps = (state, props) => {
     return {
-        
+
     };
 }
 
