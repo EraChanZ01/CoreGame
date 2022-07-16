@@ -17,12 +17,15 @@ module.exports = {
 
 
     for (let i = 0; i < 5; i++) {
+      const categoryid = mongoose.Types.ObjectId()
       const brendid = mongoose.Types.ObjectId()
       const randomBrend = faker.company.companyName();
       brend.push({
         "_id": brendid,
         "img": " ",
         "name": randomBrend,
+        "categoryName":[{categoryid}] ,
+        "email": "test4@mail.ru",
         "createdAt": Date.now(),
       })
 
@@ -32,11 +35,11 @@ module.exports = {
 
 
       for (let i = 0; i < 1; i++) {
-        const categoryid = mongoose.Types.ObjectId()
+        
         const randomType = faker.company.bsAdjective();
         category.push({
           "_id": categoryid,
-          "Type": randomType,
+          "name": randomType,
         })
 
 
@@ -46,6 +49,7 @@ module.exports = {
           const randomPrice = faker.finance.amount();
           model.push({
             "_id": modelid,
+            "userEmail": "test4@mail.ru",
             "name": "S-510 ",
             "categoryid": categoryid,
             "brendid": brendid,

@@ -1,21 +1,21 @@
-import React from "react"
+import React,{useEffect} from "react"
 import OptionDevice from "./OptionDevice"
 
 export interface ISelectDeviceProps {
 
     brends: any,
-    СountСategory:(name) => void,
+    СountСategory: (name) => void,
 
 }
 
 export interface ISelectDeviceState {
-   brendName: string,
+    brendName: string,
 
 
 }
 
 
-export default class SelectDevice extends React.Component <ISelectDeviceProps,ISelectDeviceState>{
+export default class SelectDevice extends React.Component<ISelectDeviceProps, ISelectDeviceState>{
 
     constructor(props) {
         super(props);
@@ -24,32 +24,22 @@ export default class SelectDevice extends React.Component <ISelectDeviceProps,IS
         };
 
         this.handleChange = this.handleChange.bind(this);
+
+
+
+
+    };
+
+   async handleChange(event) {
+        const target = event.target;
+        this.props.СountСategory(target.value)
+    };
+
+
+    render() {
         
 
-
-
-    };
-
-    handleChange(event) {
-
-        const target = event.target;
-        const name = target.name;
-        this.setState<typeof name>({
-
-            [name]: target.value
-
-        });
-       
-
-        this.props.СountСategory(this.state.brendName)
-
-
-    };
-    
-    render() {
-        console.log(this.state.brendName)
-
-        const {brends, СountСategory} = this.props
+        const { brends, СountСategory } = this.props
         const result = [];
         brends?.forEach(element => {
             result.push(<OptionDevice brends={element} />)
@@ -57,7 +47,7 @@ export default class SelectDevice extends React.Component <ISelectDeviceProps,IS
 
         return (
             <select className="bg-customize-text/60 min-w-20 w-96 h-12 ml-6 text-yellow-600 my-5 rounded-lg border-4 border-white/20" onChange={this.handleChange} name="brendName" >
-                {result}
+               {result}
             </select>
         )
     }

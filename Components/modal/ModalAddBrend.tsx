@@ -99,15 +99,17 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
 
     async handleSubmit(event) {
-        
+        const {korpus, monitor, cpu, ssd,hdd,cooling,bp,other,memory,video} = this.state
         const { saveBrand } = this.props;
         const BrendsData: IBrends = {
             brendsId: null,
             email: this.state.email,
             name: this.state.name,
             img: this.state.img,
-            categoryName: [this.state.korpus, this.state.monitor, this.state.cpu, this.state.ssd,this.state.hdd,this.state.cooling,this.state.bp,this.state.other,this.state.memory,this.state.video],
+            categoryName: {korpus, monitor, cpu,ssd,hdd,cooling,bp,other,memory,video}
+
         }
+        console.log(BrendsData,"test")
         saveBrand(BrendsData);
 
     

@@ -9,9 +9,9 @@ export interface Models {
 
     name: string;
     
-    categoryid: string;
+    categoryName: string;
 
-    brendid: string;
+    brendName: string;
 
     price: number;
 

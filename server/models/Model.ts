@@ -24,7 +24,7 @@ export class Models {
     public categoryName: string;
 
     @prop({type: String})
-    public categoryBrend: string;
+    public brendName: string;
 
 
 

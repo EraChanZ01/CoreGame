@@ -29,7 +29,7 @@ function Header(props: IHeaderProps) {
                             </div>
                         </button>
                     </Link>
-                    <Link href="/store">
+                    <Link href="/store/menu">
                         <button>
                             <div className="box-border pl-5">
                                 Store

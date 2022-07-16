@@ -5,11 +5,13 @@ import React from "react"
 import BrendsEntity from 'redux/models/brends'
 import saga from 'redux/decorators/saga';
 import { connect } from 'react-redux';
+import CategoryEntity from "redux/models/category"
 
 
 interface IProfileMenuProps extends WithRouterProps {
 
     fetchAllBrend: () => void,
+    fetchAllCategory: () => void,
 }
 
 interface IProfileContentState {
@@ -39,6 +41,7 @@ class ProfileMenu extends React.Component<IProfileMenuProps, IProfileContentStat
     Get(event){
 
         this.props.fetchAllBrend()
+        this.props.fetchAllCategory()
     }
 
     render() {
@@ -68,7 +71,7 @@ class ProfileMenu extends React.Component<IProfileMenuProps, IProfileContentStat
                     </div>
                     <div className=" text-start text-white mt-10 border-1 hover:bg-white/5 hover:text-yellow-600 h-10 mx-6">
                         <Link href={"/profile/ProfileDevice" }>
-                            <button onClick={this.Get} type="button">
+                            <button  type="button">
 
                                 <p className="p-2">Дивайсы</p>
 
@@ -83,12 +86,16 @@ class ProfileMenu extends React.Component<IProfileMenuProps, IProfileContentStat
 
 const mapStateToProps = (state, props) => {
     const entities = state.entities;
+    
     return {
-        entities
+        entities,
+        
+        
     };
 }
 
-const login_connected = connect(mapStateToProps, BrendsEntity.triggers())(ProfileMenu);
+const login_connected = connect(mapStateToProps, {...BrendsEntity.triggers(),...CategoryEntity.triggers()})(ProfileMenu);
+
 export default withRouter(login_connected);
 
 

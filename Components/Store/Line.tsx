@@ -1,14 +1,33 @@
 import React from "react"
 import Link from "next/link"
+import saga from 'redux/decorators/saga';
+import ModelEntity from 'redux/models/model'
+import { withRouter } from 'next/router';
+import { connect } from 'react-redux';
+
+interface MyProps {
+    fetchAllModels: () => void,
+
+}
 
 
 
+export class Line extends React.Component<MyProps>{
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+
+        }
+        this.handleClick = this.handleClick.bind(this)
+    }
 
 
-export default class Line extends React.Component {
 
-    handleClick() {
-
+    handleClick(event) {
+        const { fetchAllModels } = this.props
+        fetchAllModels()
     }
 
     render() {
@@ -49,3 +68,12 @@ export default class Line extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state, props) => {
+    return {
+
+    };
+}
+
+const monitor_connected = connect(mapStateToProps, ModelEntity.triggers())(Line);
+export default withRouter(monitor_connected);

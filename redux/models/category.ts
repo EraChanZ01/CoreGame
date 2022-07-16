@@ -6,7 +6,7 @@ import { ENTITIES } from 'server/common';
 export interface Category {
     id: string;
 
-    Type: string;  
+    name: string;  
 
 
 

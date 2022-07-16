@@ -7,7 +7,7 @@ export class Category {
 
 
     @prop({type: String})
-    public Type: string;  
+    public name: string;  
 
 
 }

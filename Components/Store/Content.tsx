@@ -13,7 +13,7 @@ export default class Content extends React.Component<IContentProps> {
         const { children } = this.props;
 
         return (
-            <div className="flex justify-between lg:mx-[90px] xl:mx-[250px] mb-10 z-30">
+            <div className=" lg:mx-[90px] xl:mx-[250px] mb-10 z-30">
                 {children}
             </div>
 

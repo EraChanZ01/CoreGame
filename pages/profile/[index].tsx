@@ -11,13 +11,15 @@ import { connect } from 'react-redux';
 import PersonalData from '../../Components/Profile/ProfContents/PersonalData'
 import PrfileBrend from '../../Components/Profile/ProfContents/ProfileBrend'
 import ProfileDevice from '../../Components/Profile/ProfContents/ProfileDevice'
-import BrendsEntity from 'redux/models/brends'
+import CategoryEntity from 'redux/models/category'
 import saga from 'redux/decorators/saga';
 
 
 interface MyProps extends WithRouterProps {
-
-
+    
+    fetchAllCategory:() => void,
+    
+    
 }
 
 interface MyState {
@@ -33,7 +35,7 @@ export enum PageParams {
 }
 
 
-@saga(BrendsEntity)
+@saga(CategoryEntity)
 export class Profile extends React.Component<MyProps, MyState> {
 
     constructor(props) {
@@ -72,6 +74,11 @@ export class Profile extends React.Component<MyProps, MyState> {
                 return (<ProfileDevice />)
                 break;
         }
+    }
+
+    getCateg(event){
+
+        this.props.fetchAllCategory()
     }
 
 
@@ -115,7 +122,7 @@ const mapStateToProps = (state, props) => {
     };
 }
 
-const home = connect(mapStateToProps, BrendsEntity.triggers())(Profile);
+const home = connect(mapStateToProps, CategoryEntity.triggers())(Profile);
 export default withRouter(home);
 
 

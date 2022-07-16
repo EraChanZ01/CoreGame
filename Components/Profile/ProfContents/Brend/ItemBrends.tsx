@@ -6,7 +6,7 @@ import React from "react";
 
 
 export default function ListBrends({ brend }) {
-    console.log(brend.get("img"))
+    
     return (
         <div className=" flex my-6 text-white">
             <div className="border w-12 h-12 ml-5">

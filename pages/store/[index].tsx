@@ -9,7 +9,7 @@ import { withRouter } from 'next/router';
 import { connect } from 'react-redux';
 import Line from '../../Components/Store/Line'
 import Content from '../../Components/Store/Content'
-import Monitor from '../../Components/Store/ModelContent/Monitor'
+import Monitor from '../../Components/Store/ModelContent/MonitorList'
 
 
 
@@ -27,19 +27,9 @@ export enum PageParams {
 @saga(ModelEntity)
 export class Stor extends React.Component<MyProps> {
 
-    constructor(props) {
-        super(props);
+    
 
-        this.state = {
-
-        }
-        this.handleClick = this.handleClick.bind(this)
-    }
-
-    handleClick(event) {
-        const { fetchAllModels } = this.props
-        fetchAllModels()
-    }
+   
 
     getStoreContent() {
         const { router } = this.props;

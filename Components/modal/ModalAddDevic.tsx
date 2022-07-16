@@ -7,7 +7,7 @@ import SelectBrend from "./Device/SelectBrend";
 import brends from "redux/models/brends";
 import SelectCategory from "./Device/SelectCategory";
 import category from "redux/models/category";
-import {IModel} from 'server/constants';
+import { IModel } from 'server/constants';
 
 export interface IModelAddProps {
     children?: React.ReactNode;
@@ -15,6 +15,7 @@ export interface IModelAddProps {
     saveModel: (data: IModel) => void,
     brends: any,
     category: any,
+
 }
 
 export interface IModelAddState {
@@ -39,7 +40,7 @@ export class ModelAddDevic extends React.Component<IModelAddProps, IModelAddStat
             imgg: "",
             name: "",
             categoryName: "",
-            brendName: "",
+            brendName: null,
             price: null,
             info: "",
             img: "",
@@ -54,9 +55,9 @@ export class ModelAddDevic extends React.Component<IModelAddProps, IModelAddStat
         this.СountСategory = this.СountСategory.bind(this);
     };
 
-    СountСategory(name){
+    СountСategory(name) {
         console.log(name)
-        this.setState({brendName: `${name}`})
+        this.setState({ brendName: `${name}` })
     }
 
     openInput(event) {
@@ -80,20 +81,35 @@ export class ModelAddDevic extends React.Component<IModelAddProps, IModelAddStat
 
         const { saveModel } = this.props;
         console.log(saveModel)
-        const ModelData : IModel = {
+        const ModelData: IModel = {
             name: this.state.name,
             info: this.state.info,
             price: this.state.price,
             img: this.state.img,
             categoryName: this.state.categoryName,
-            brendName: this.state.brendName
+            brendName: this.state.brendName,
         }
         saveModel(ModelData);
-        
+
     }
 
     render() {
+
+        console.log(this.state.brendName)
         const { opDisp, brends, category } = this.props;
+
+        const currentBrend = brends?.find(brend => brend?.get("id") == this.state.brendName)
+
+        const brendCategories = category?.filter(categor => {
+
+            if (currentBrend?.get("categoryName")?.find(categorName =>
+                
+              categorName?.get("categoryid") == categor?.get("id")
+            )) { return true }
+
+            else return false
+        }
+        )
         return (
             <div className={`  ${opDisp ? opDisp : 'hidden'}  rounded-xl fixed top-32 left-[500px] bg-customize-button w-[800px] justify-center z-50 border-4 border-black/50 `}>
                 <button><svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2"
@@ -129,11 +145,11 @@ export class ModelAddDevic extends React.Component<IModelAddProps, IModelAddStat
                         <div className="my-2 border-white/20 text-white/20">
                             <div className="flex">
                                 <input className=" h-12 p-2 text-2xl bg-customize-text/70 my-5 w-full brightness-200 border-4 border-gray-700/20 rounded-lg " placeholder='Название' name="name" onChange={this.handleChange} />
-                                <SelectBrend brends={brends}  СountСategory={this.СountСategory}/>
+                                <SelectBrend brends={brends} СountСategory={this.СountСategory} />
                             </div>
                             <div className="flex">
                                 <input className=" p-2 mb-5 text-2xl w-full h-12 bg-customize-text/70 brightness-200 border-4 border-gray-700/20 rounded-lg " placeholder='Цена' name="price" onChange={this.handleChange} />
-                                <SelectCategory brends={brends} category={category}/>
+                                <SelectCategory category={brendCategories}  />
                             </div>
                             <button className="border-2 rounded-xl w-full h-10 text-black text-xl bg-yellow-600 border-gray-700/20" type="button" onClick={this.handleSubmit} >
                                 Добавить
@@ -149,9 +165,12 @@ export class ModelAddDevic extends React.Component<IModelAddProps, IModelAddStat
 
 
 const mapStateToProps = (state, props) => {
+
+
     const brends = state.entities.get("brands");
- 
-    console.log(category)
+    const category = state.entities.get("category")
+
+
     return {
         brends,
         category

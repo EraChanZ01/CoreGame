@@ -1,5 +1,5 @@
 import ModalAddBrend from "../../modal/ModalAddBrend"
-import React from "react";
+import React,{useEffect} from "react";
 import Link from 'next/link'
 import { threadId } from 'worker_threads';
 import Router, { withRouter } from 'next/router'
@@ -8,6 +8,7 @@ import saga from 'redux/decorators/saga';
 import { connect } from 'react-redux';
 import { ILoginData } from 'server/constants';
 import BrendsEntity from 'redux/models/brends'
+import CategoryEntity from 'redux/models/category'
 import ListBrends from "./Brend/ListBrends";
 import brends from "redux/models/brends";
 
@@ -17,6 +18,7 @@ interface MyProps {
 
     brends: any,
     fetchAllBrend: () => void,
+    fetchAllCategory: () => void,
 }
 
 interface MyState {
@@ -25,6 +27,11 @@ interface MyState {
     brend: string,
     get: boolean
 }
+
+
+
+
+
 
 @saga(BrendsEntity)
 export class PrfileBrend extends React.Component<MyProps, MyState> {
@@ -46,10 +53,12 @@ export class PrfileBrend extends React.Component<MyProps, MyState> {
     };
 
 
+    
+
     async Get() {
 
         await this.props.fetchAllBrend()
-
+        
 
 
         this.setState({ get: true })
@@ -75,11 +84,9 @@ export class PrfileBrend extends React.Component<MyProps, MyState> {
 
     render() {
 
+       
 
-        //const brends = [
-           // { id: 1, name: 'Samsung', img: '' },
-           // { id: 2, name: 'Intel', img: '' },
-        //]
+       
 
 
         if (this.state.get == false) {

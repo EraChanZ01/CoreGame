@@ -4,40 +4,33 @@ import Router, { withRouter } from 'next/router'
 import saga from 'redux/decorators/saga';
 import { connect } from 'react-redux';
 import ModalAddDevic from '../../modal/ModalAddDevic'
-
-
-
-
-
-
-
-
-
-
+import BrendsEntity from 'redux/models/brends'
+import CategoryEntity from 'redux/models/category'
 
 
 
 
 interface MyProps {
-
+    fetchAllCategory: () => void
 
 }
 
 interface MyState {
     onDisp: string,
     addDevice: string
+    get: boolean
 
 }
 
-
-export default class ProfileDevice extends React.Component<MyProps, MyState> {
+@saga(CategoryEntity)
+export class ProfileDevice extends React.Component<MyProps, MyState> {
 
     constructor(props) {
         super(props);
         this.state = {
             onDisp: '',
             addDevice: '',
-
+            get: false
 
         };
 
@@ -47,6 +40,8 @@ export default class ProfileDevice extends React.Component<MyProps, MyState> {
 
 
     };
+
+    
 
     onDisp(event) {
 
@@ -85,3 +80,16 @@ export default class ProfileDevice extends React.Component<MyProps, MyState> {
         )
     }
 }
+
+const mapStateToProps = (state, props) => {
+
+
+
+    return {
+
+
+    };
+}
+
+const login_connected = connect(mapStateToProps, CategoryEntity.triggers())(ProfileDevice);
+export default withRouter(login_connected);

@@ -2,14 +2,19 @@ import React from "react"
 
 
 
-export default function SelectDevice({ brends }) {
+export default function SelectDevice({category }) {
+
+  
 
     
+    
+
 
     return (
         <option className="">
-            {brends}
+            {category.get("name")}
         </option>
 
     )
+
 }
