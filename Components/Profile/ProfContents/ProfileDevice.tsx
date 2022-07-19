@@ -41,19 +41,17 @@ export class ProfileDevice extends React.Component<MyProps, MyState> {
 
     };
 
-    
+    offDisp(option) {
+        this.setState({ onDisp: `${option} ` });
+
+    }
 
     onDisp(event) {
 
         this.setState({ onDisp: 'flex' });
     }
 
-    offDisp(event) {
-
-
-        this.setState({ onDisp: 'hidden' });
-
-    }
+    
 
 
     addDevice() { }
@@ -62,7 +60,7 @@ export class ProfileDevice extends React.Component<MyProps, MyState> {
     render() {
         return (
             <div className="relative mb-20 border-[1px] border-white/20 bg-customize-button/70 w-full h-[850px] rounded-lg">
-                <ModalAddDevic opDisp={this.state.onDisp} addDevice={this.addDevice} />
+                <ModalAddDevic opDisp={this.state.onDisp} offDisp={this.offDisp} />
                 <div className="flex">
                     <div className="">
                         <p className="ml-16 mt-5 text-xl text-white">Доступные Дивайсы</p>

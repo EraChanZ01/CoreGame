@@ -15,6 +15,7 @@ export interface IModelAddProps {
     saveModel: (data: IModel) => void,
     brends: any,
     category: any,
+    offDisp: (option) => void
 
 }
 
@@ -26,6 +27,7 @@ export interface IModelAddState {
     categoryName: string,
     brendName: string,
     imgg: string,
+    dispOn: string,
 
 
 }
@@ -44,6 +46,7 @@ export class ModelAddDevic extends React.Component<IModelAddProps, IModelAddStat
             price: null,
             info: "",
             img: "",
+            dispOn: "",
 
 
 
@@ -93,6 +96,12 @@ export class ModelAddDevic extends React.Component<IModelAddProps, IModelAddStat
 
     }
 
+
+    Dispoff(option) {
+        this.setState({ dispOn: `${option}` })
+        
+    }
+
     render() {
 
         console.log(this.state.brendName)
@@ -112,7 +121,7 @@ export class ModelAddDevic extends React.Component<IModelAddProps, IModelAddStat
         )
         return (
             <div className={`  ${opDisp ? opDisp : 'hidden'}  rounded-xl fixed top-32 left-[500px] bg-customize-button w-[800px] justify-center z-50 border-4 border-black/50 `}>
-                <button><svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2"
+                <button onClick={() =>this.props.offDisp('hidden')} ><svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2"
                     width="25.000000pt" height="25.000000pt" viewBox="0 0 512.000000 512.000000"
                     preserveAspectRatio="xMidYMid meet">
 

@@ -11,7 +11,7 @@ import xSave from "redux/models/Entities";
 import { response } from "express";
 import { AddBrendimg } from "./AddBrendImg";
 import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
-
+import BrendInput from "./Brend/BrendInput"
 
 
 
@@ -20,6 +20,7 @@ export interface IModalAddProps {
     Disp: String,
     offDisp: (why) => void,
     saveBrand: (data: IBrends) => void,
+    category: any
 
 }
 
@@ -33,17 +34,7 @@ export interface IModalAddState {
     filesSize: string,
     filesName: string,
     dispOn: string,
-    imgg: string,
-    monitor: string,
-    korpus: string,
-    video: string,
-    bp: string,
-    memory: string,
-    cooling: string,
-    ssd: string,
-    hdd: string,
-    cpu: string,
-    other: string,
+    chooseCategory: any
 }
 
 
@@ -66,17 +57,7 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
             filesSize: "",
             filesName: "",
             dispOn: "",
-            imgg: "",
-            monitor: "",
-            korpus: "",
-            video: "",
-            bp: "",
-            memory: "",
-            cooling: "",
-            ssd: "",
-            hdd: "",
-            cpu: "",
-            other: "",
+            chooseCategory: [],
 
 
         };
@@ -85,10 +66,15 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
         this.openInput = this.openInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.Dispoff = this.Dispoff.bind(this);
+        this.СhooseCategory = this.СhooseCategory.bind(this);
 
 
 
     };
+
+    СhooseCategory(option){
+        console.log(option)
+    }
 
     Dispoff(off) {
         this.setState({ dispOn: `${off}` })
@@ -99,20 +85,20 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
 
     async handleSubmit(event) {
-        const {korpus, monitor, cpu, ssd,hdd,cooling,bp,other,memory,video} = this.state
+
         const { saveBrand } = this.props;
         const BrendsData: IBrends = {
             brendsId: null,
             email: this.state.email,
             name: this.state.name,
             img: this.state.img,
-            categoryName: {korpus, monitor, cpu,ssd,hdd,cooling,bp,other,memory,video}
+            categoryName: [],
 
         }
-        console.log(BrendsData,"test")
+        console.log(BrendsData, "test")
         saveBrand(BrendsData);
 
-    
+
 
     }
 
@@ -120,6 +106,8 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 
     handleChange(event) {
 
+        
+       
         const target = event.target;
         const name = target.name;
         this.setState<typeof name>({
@@ -127,7 +115,8 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
             [name]: target.value
 
         });
-
+        
+        
     }
 
     openInput(event) {
@@ -154,19 +143,20 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
             reader.readAsDataURL(file)
         })
 
-        console.log(document.getElementById('input-div'))
-
         
+
+
     }
 
 
 
 
     render() {
-        const { Disp } = this.props;
+        const { Disp,category } = this.props;
+        
 
         return (
-            <div className={` ${Disp ? Disp : 'hidden'} w-[800px] h-[650px] bg-customize-button inset-y-[100px] inset-x-[550px] fixed z-40 rounded-xl border-[1px] border-customize-text `}>
+            <div className={` ${Disp ? Disp : 'hidden'} w-[800px] max-h-[550px] bg-customize-button inset-y-[100px] inset-x-[550px] fixed z-40 rounded-xl border-[1px] border-customize-text `}>
                 <button className="" type="button" onClick={() => this.props.offDisp('hidden')} >
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="absolute top-2 right-2"
                         width="25.000000pt" height="25.000000pt" viewBox="0 0 512.000000 512.000000"
@@ -204,49 +194,7 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
                             <input type="email" className=" mt-10 w-[300px] h-8 bg-customize-text/60 p-1" name="email" placeholder='Почта' onChange={this.handleChange} />
                         </div>
                     </div>
-                    <div className=" ml-[70px] mt-4 text-yellow-600/80">
-                        <div className="w-[150px]">
-                            <div className="flex h-7 ">
-                                <input type="checkbox" className="w-5 h-5" name="korpus" value="Корпус" onChange={this.handleChange} /><p className="ml-2"> Корпус </p>
-                            </div>
-                            <div className="flex h-7">
-                                <input type="checkbox" className="w-5 h-5 " name="monitor" value="Монитор" onChange={this.handleChange} /> <p className="ml-2"> Монитор</p>
-                            </div>
-                            <div className="flex h-7">
-
-                                <input type="checkbox" className="w-5 h-5" name="video" value="Видеокарта" onChange={this.handleChange}/> <p className="ml-2"> Видеокарта</p>
-                            </div>
-                            <div className="flex h-7">
-
-                                <input type="checkbox" className="w-5 h-5 " name="bp" value="Блок питание" onChange={this.handleChange}/> <p className="ml-2"> Блок питание</p>
-                            </div>
-                            <div className="flex h-7">
-
-                                <input type="checkbox" className="w-5 h-5" name="memory" value="Модуль памяти" onChange={this.handleChange}/> <p className="ml-2"> Модуль памяти </p>
-                            </div>
-                        </div>
-                        <div className="">
-                            <div className="flex h-7">
-                                <input type="checkbox" className="w-5 h-5 " name="cooling" value="Система охлаждения" onChange={this.handleChange}/> <p className="ml-2"> Система охлаждения </p>
-                            </div>
-
-                            <div className="flex h-7">
-                                <input type="checkbox" className="w-5 h-5" name="ssd" value="SSD" onChange={this.handleChange}/> <p className="ml-2"> SSD</p>
-                            </div>
-
-                            <div className="flex h-7">
-                                <input type="checkbox" className="w-5 h-5 " name="hdd" value="HDD" onChange={this.handleChange}/> <p className="ml-2"> HDD</p>
-                            </div>
-                            <div className="flex h-7">
-
-                                <input type="checkbox" className="w-5 h-5" name="cpu" value="Процесор" onChange={this.handleChange}/> <p className="ml-2"> Процесор</p>
-                            </div>
-                            <div className="flex h-7">
-
-                                <input type="checkbox" className="w-5 h-5" name="other" value="Прочее" onChange={this.handleChange}/> <p className="ml-2"> Прочее</p>
-                            </div>
-                        </div>
-                    </div>
+                    <BrendInput category={category} СhooseCategory={this.СhooseCategory}/>
                     <div className=" flex justify-center mt-5">
                         <button className="bg-yellow-600 rounded-lg h-8 w-full mx-[150px] text-white" type='button' onClick={this.handleSubmit}>
                             Добавить
@@ -263,9 +211,17 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
 };
 
 const mapStateToProps = (state, props) => {
+
+
+    const category = state.entities.get("category")
+
+
     return {
 
+        category
     };
+
+
 }
 
 const monitor_connected = connect(mapStateToProps, BrendsEntity.triggers())(ModalAddBrend);
