@@ -99,6 +99,45 @@ export class ModalAddBrend extends React.Component<IModalAddProps, IModalAddStat
         saveBrand(BrendsData);
 
 
+        };
+
+        params['headers']['content-type'] = 'application/json';
+        params['body'] = JSON.stringify(this.state);
+        return fetch(fullUrl, params)
+            .then((response) => {
+                return response.json().then((json) => ({ json, response }));
+            }).then(({ json, response }) =>
+                Promise.resolve({
+                    success: response.ok ? true : false,
+                    response: json
+                })
+            );
+
+    }*/
+
+    async handleSubmit(event) {
+
+        const brendData: IBrends = {
+            brendsId: null,
+            name: this.state.name,
+            email: this.state.email,
+            img: this.state.img,
+        }
+
+        const xSave = new Entity
+
+        //await this.entranceUser()
+
+        xSave.xSave('http://localhost:3000' + '/' + 'save', brendData)
+
+        Router.push('/profile/PrfileBrend')
+        
+        BrendsEntity.saveBrends
+
+        console.log(xSave.xSave, 'save')
+        console.log(brendData, 'data')
+        console.log(Entity,'entity')
+        console.log(BrendsEntity.saveBrends,'121212')
 
     }
 
